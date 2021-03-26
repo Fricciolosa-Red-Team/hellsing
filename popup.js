@@ -1,38 +1,27 @@
-var isExtensionOn = true;
+/*
+// Initialize butotn with users's prefered color
+let changeColor = document.getElementById("changeColor");
 
-let button = document.getElementById("relais-hellsing");
+chrome.storage.sync.get("color", ({ color }) => {
+  changeColor.style.backgroundColor = color;
+});
 
-function disableButton() {
-  var disableButton = document.getElementById("relais-hellsing");
-  if (disableButton.innerHTML === "false") {
-    isExtensionOn = false;
-  } else if (disableButton.innerHTML === "true") {
-    isExtensionOn = true;
-  } else {
-    alert("Error in Hellsing.");
-  }
-}
+// When the button is clicked, inject setPageBackgroundColor into current page
+changeColor.addEventListener("click", async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-
-// When the button is clicked, change setting
-button.addEventListener("click", async () => {
-  var disableButton = document.getElementById("relais-hellsing");
-  var state = document.getElementById("state-button-hellsing");
-
-  //Send message to event.js (background script) telling it to disable the extension.
-  isExtensionOn = !isExtensionOn;
-  chrome.extension.sendMessage({ cmd: "setOnOffState", data: { value: isExtensionOn } });
-
-  chrome.extension.sendMessage({ cmd: "getOnOffState" }, function (response) {
-    if (response !== undefined) {
-      if (response) {
-        state.innerHTML = "I'm running!";
-        console.log("Hellsing started.")
-      }
-      else {
-        state.innerHTML = "I'm not running!";
-        console.log("Hellsing stopped.")
-      }
-    }
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: setPageBackgroundColor,
   });
 });
+
+// The body of this function will be execuetd as a content script inside the
+// current page
+function setPageBackgroundColor() {
+  chrome.storage.sync.get("color", ({ color }) => {
+    document.body.style.backgroundColor = color;
+  });
+}
+*/
+

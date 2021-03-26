@@ -1,20 +1,4 @@
-var isExtensionOn = true;
-
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.cmd === "setOnOffState") {
-            isExtensionOn = request.data.value;
-            if (!isExtensionOn) {
-                removeOldBanner();
-            }
-        }
-    });
-
-if (isExtensionOn) {
-    document.addEventListener('DOMContentLoaded', searchSecrets, false);
-} else {
-    removeOldBanner();
-}
+document.addEventListener('DOMContentLoaded', searchSecrets, false);
 
 var targets = {
     "api": "api",
@@ -27,40 +11,38 @@ var targets = {
 
 function searchSecrets() {
 
-    if (isExtensionOn) {
-        content = document.documentElement.innerHTML.toLowerCase();
+    content = document.documentElement.innerHTML.toLowerCase();
 
-        found = []
+    found = []
 
-        for (var key in targets) {
-            elem = targets[key];
-            if (content.indexOf(elem) > -1) {
-                found.push(key);
-            }
+    for (var key in targets) {
+        elem = targets[key];
+        if (content.indexOf(elem) > -1) {
+            found.push(key);
         }
-        if (found.length > 0) {
-            createBanner(found);
-        }
+    }
+    if (found.length > 0) {
+        createBanner(found);
+    } else {
+        removeOldBanner();
     }
 }
 
 function createBanner(elem) {
-    if (isExtensionOn) {
-        var banner = document.createElement("div");
-        banner.className = "bannerHellsingClass";
-        banner.id = "bannerHellsing"
-        elems = ""
-        for (var el in elem) {
-            elems.concat(el.concat(", "));
-        }
-        banner.innerHTML = elem + " matched!";
+    var banner = document.createElement("div");
+    banner.className = "bannerHellsingClass";
+    banner.id = "bannerHellsing"
+    elems = ""
+    for (var el in elem) {
+        elems.concat(el.concat(", "));
+    }
+    banner.innerHTML = elem + " matched!";
 
-        banner.setAttribute("style", "background-color: red !important; color: black !important; \
+    banner.setAttribute("style", "background-color: red !important; color: black !important; \
 text-align: center !important; position: fixed !important; top: 0 !important; \
 z-index: 100000 !important; margin: auto !important; width: 100% !important;");
 
-        document.body.insertBefore(banner, document.body.childNodes[0]);
-    }
+    document.body.insertBefore(banner, document.body.childNodes[0]);
 }
 
 Element.prototype.remove = function () {
