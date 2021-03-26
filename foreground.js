@@ -1,19 +1,30 @@
 document.addEventListener('DOMContentLoaded', searchSecrets, false);
 
 var targets = {
-    "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key"],
+    "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key", "access_key", "access-key", "accesskey", "api-token", "api_token"],
     "Weglot Api Key": ["api:wg_", "api:'wg_", 'api:"wg_', "key:'wg_", "key:wg_",
         'key:"wg_', "api=wg_", "api='wg_", 'api="wg_', "key='wg_", "key=wg_", 'key="wg_'],
     "Google Api Key": ["key=alza", "key:alza", "key:aiza", "key=aiza"],
+    "Gitlab Personal Access Token": ["projects?private_token="],
     "GMail OAuth2.0": [".apps.googleusercontent.com"],
+    "Wakatime Api Key": ["wakatime.com/api/v1/users/current/projects/?api_key="],
+    "WPEngine Api Key": ["wpe_apikey="],
+    "ButterCMS Api Key": ["api.buttercms.com/v2/posts/?auth_token="],
+    "Bit.ly Access Token": ["api-ssl.bitly.com/v3/shorten?access_token="],
     "Picatic Api Key": ["sk_live_"],
     "Stripe Api Key": ["sk_live_"],
     "Square Access Token": ["sqOatp-"],
     "Square OAuth Secret": ["q0csp-"],
+    "HubSpot Api Key": ["?hapikey="],
+    "GitHub Client ID": ["?client_id=", "&client_id="],
+    "GitHub Client Secret": ["?client_secret=", "&client_secret="],
+    "Circle-CI Access Token": ["circle-token"],
     "PayPal/Braintree Access Token": ["access_token,production"],
     "Amazon AMS Auth Token": ["amzn.mws"],
     "AWS Secret Key": ["AKIA"],
-    "OpenSSH Key": ["beginopensshprivatekey", "endopensshprivatekey"]
+    "OpenSSH Private Key": ["beginopensshprivatekey", "endopensshprivatekey"],
+    "RSA Private Key": ["beginrsaprivatekey", "endrsaprivatekey"],
+    "Private Key": ["beginprivatekey", "endprivatekey"]
 };
 
 function searchSecrets() {
@@ -45,7 +56,7 @@ function createBanner(found) {
     var banner = document.createElement("div");
     banner.className = "bannerHellsingClass";
     banner.id = "bannerHellsing";
-    elems = "";
+    elems = "Possible ";
     for (i = 0; i < found.length; i++) {
         if (i == found.length - 1) {
             elems = elems.concat(found[i].concat(" "));
