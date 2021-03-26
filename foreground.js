@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', searchSecrets, false);
 
 var targets = {
-    "api": "api",
-    "-key": "-key",
-    "_key": "_key",
-    "token": "token",
-    "Begin OpenSSH Key": "begin openssh private key",
-    "End OpenSSH key": "end openssh private key",
+    "Weglot Api Key": ["api_key: 'wg_", "api_key:'wg_", "api_key:wg_", "apikey:wg_"],
+    "OpenSSH Key": ["begin openssh private key", "end openssh private key"]
 };
 
 function searchSecrets() {
@@ -17,26 +13,35 @@ function searchSecrets() {
 
     for (var key in targets) {
         elem = targets[key];
-        if (content.indexOf(elem) > -1) {
-            found.push(key);
+        for (var i = 0; i < elem.length; i++) {
+            element = elem[i]
+            if (content.indexOf(element) > -1) {
+                found.push(key);
+            }
         }
     }
-    if (found.length > 0) {
-        createBanner(found);
+    var mySet = new Set(found);
+    if (mySet.size > 0) {
+        createBanner(Array.from(mySet));
     } else {
         removeOldBanner();
     }
 }
 
-function createBanner(elem) {
+function createBanner(found) {
+    removeOldBanner();
     var banner = document.createElement("div");
     banner.className = "bannerHellsingClass";
-    banner.id = "bannerHellsing"
-    elems = ""
-    for (var el in elem) {
-        elems.concat(el.concat(", "));
+    banner.id = "bannerHellsing";
+    elems = "";
+    for (i = 0; i < found.length; i++) {
+        if (i == found.length - 1) {
+            elems = elems.concat(found[i].concat(" "));
+        } else {
+            elems = elems.concat(found[i].concat(", "));
+        }
     }
-    banner.innerHTML = elem + " matched!";
+    banner.innerHTML = elems + "matched!";
 
     banner.setAttribute("style", "background-color: red !important; color: black !important; \
 text-align: center !important; position: fixed !important; top: 0 !important; \
