@@ -1,6 +1,6 @@
 # hellsing
 
-Sniper. Passive Secrets Hunting.
+**Sniper. Passive Secrets Hunting.**
 
 **1.** Open the Extension Management page by navigating to `chrome://extensions`.
 
