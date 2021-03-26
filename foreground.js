@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', searchSecrets, false);
 
 var targets = {
+    "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key"],
     "Weglot Api Key": ["api:wg_", "api:'wg_", 'api:"wg_', "key:'wg_", "key:wg_",
         'key:"wg_', "api=wg_", "api='wg_", 'api="wg_', "key='wg_", "key=wg_", 'key="wg_'],
     "OpenSSH Key": ["beginopensshprivatekey", "endopensshprivatekey"]
