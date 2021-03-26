@@ -4,7 +4,7 @@ var targets = {
     "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key"],
     "Weglot Api Key": ["api:wg_", "api:'wg_", 'api:"wg_', "key:'wg_", "key:wg_",
         'key:"wg_', "api=wg_", "api='wg_", 'api="wg_', "key='wg_", "key=wg_", 'key="wg_'],
-    "Google Api Key": ["key=alza", "key:alza"],
+    "Google Api Key": ["key=alza", "key:alza", "key:aiza", "key=aiza"],
     "GMail OAuth2.0": [".apps.googleusercontent.com"],
     "Picatic Api Key": ["sk_live_"],
     "Stripe Api Key": ["sk_live_"],
