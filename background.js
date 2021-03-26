@@ -1,19 +1,29 @@
 let active_tab_id = 0;
 
-chrome.tabs.onActivated.addListener(tab => {
-  chrome.tabs.get(tab.tabId, current_tab_info => {
-    active_tab_id = tab.tabId;
-    chrome.tabs.insertCSS(null, { file: './mystyles.css' });
-    chrome.tabs.executeScript(null, { file: './foreground.js' }, () => console.log('i injected'))
+var isExtensionOn = true;
+
+start();
+
+chrome.runtime.onMessage.addListener(
+  function (request, sender, sendResponse) {
+    if (request.cmd === "setOnOffState") {
+      isExtensionOn = request.data.value;
+      if (isExtensionOn) {
+        start();
+      }
+    }
+
+    if (request.cmd === "getOnOffState") {
+      sendResponse(isExtensionOn);
+    }
   });
-});
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === 'yo check the storage') {
-    chrome.tabs.sendMessage(active_tab_id, { message: 'yo i got your message' })
-
-    chrome.storage.local.get("password", value => {
-      console.log(value)
+function start() {
+  chrome.tabs.onActivated.addListener(tab => {
+    chrome.tabs.get(tab.tabId, current_tab_info => {
+      active_tab_id = tab.tabId;
+      //chrome.tabs.insertCSS(null, { file: './mystyles.css' });
+      chrome.tabs.executeScript(null, { file: './foreground.js' })
     });
-  }
-});
+  });
+}

@@ -1,55 +1,83 @@
-document.addEventListener('DOMContentLoaded', createBanner, false);
+var isExtensionOn = true;
 
-
-function createBanner() {
-    var banner = document.createElement("div");
-    banner.className = "bannerHellsingClass";
-    banner.id = "bannerHellsing"
-    banner.innerHTML = "Secrets Hunted!";
-
-    banner.setAttribute("style", "background-color: red !important; color: black !important; text-align: center !important;margin: auto; width: 100 %;");
-
-    bannerOld = document.getElementById("bannerHellsing");
-
-    Element.prototype.remove = function () {
-        this.parentElement.removeChild(this);
-    }
-    NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
-        for (var i = this.length - 1; i >= 0; i--) {
-            if (this[i] && this[i].parentElement) {
-                this[i].parentElement.removeChild(this[i]);
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        if (request.cmd === "setOnOffState") {
+            isExtensionOn = request.data.value;
+            if (!isExtensionOn) {
+                removeOldBanner();
             }
         }
+    });
+
+if (isExtensionOn) {
+    document.addEventListener('DOMContentLoaded', searchSecrets, false);
+} else {
+    removeOldBanner();
+}
+
+var targets = {
+    "api": "api",
+    "-key": "-key",
+    "_key": "_key",
+    "token": "token",
+    "Begin OpenSSH Key": "begin openssh private key",
+    "End OpenSSH key": "end openssh private key",
+};
+
+function searchSecrets() {
+
+    if (isExtensionOn) {
+        content = document.documentElement.innerHTML.toLowerCase();
+
+        found = []
+
+        for (var key in targets) {
+            elem = targets[key];
+            if (content.indexOf(elem) > -1) {
+                found.push(key);
+            }
+        }
+        if (found.length > 0) {
+            createBanner(found);
+        }
     }
+}
+
+function createBanner(elem) {
+    if (isExtensionOn) {
+        var banner = document.createElement("div");
+        banner.className = "bannerHellsingClass";
+        banner.id = "bannerHellsing"
+        elems = ""
+        for (var el in elem) {
+            elems.concat(el.concat(", "));
+        }
+        banner.innerHTML = elem + " matched!";
+
+        banner.setAttribute("style", "background-color: red !important; color: black !important; \
+text-align: center !important; position: fixed !important; top: 0 !important; \
+z-index: 100000 !important; margin: auto !important; width: 100% !important;");
+
+        document.body.insertBefore(banner, document.body.childNodes[0]);
+    }
+}
+
+Element.prototype.remove = function () {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
+    for (var i = this.length - 1; i >= 0; i--) {
+        if (this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
+
+function removeOldBanner() {
+    bannerOld = document.getElementById("bannerHellsing");
 
     if (bannerOld != null) {
         bannerOld.remove();
     }
-
-    document.body.insertBefore(banner, document.body.childNodes[0]);
 }
-
-// const first = document.createElement('button');
-// first.innerText = "SET DATA";
-// first.id = "first";
-
-// const second = document.createElement('button');
-// second.innerText = "SHOUTOUT TO BACKEND";
-// second.id = "second";
-
-// document.querySelector('body').appendChild(first);
-// document.querySelector('body').appendChild(second);
-
-// first.addEventListener('click', () => {
-//     chrome.storage.local.set({ "password": "123" });
-//     console.log("I SET DATA");
-// });
-
-// second.addEventListener('click', () => {
-//     chrome.runtime.sendMessage({message: 'yo check the storage'});
-//     console.log('I SENT THE MESSAGE')
-// });
-
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//     console.log(request.message)
-// });
