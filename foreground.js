@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', searchSecrets, false);
 
 var targets = {
-    "Weglot Api Key": ["api_key: 'wg_", "api_key:'wg_", "api_key:wg_", "apikey:wg_"],
-    "OpenSSH Key": ["begin openssh private key", "end openssh private key"]
+    "Weglot Api Key": ["api:wg_", "api:'wg_", 'api:"wg_', "key:'wg_", "key:wg_",
+        'key:"wg_', "api=wg_", "api='wg_", 'api="wg_', "key='wg_", "key=wg_", 'key="wg_'],
+    "OpenSSH Key": ["beginopensshprivatekey", "endopensshprivatekey"]
 };
 
 function searchSecrets() {
 
-    content = document.documentElement.innerHTML.toLowerCase();
+    content = document.documentElement.innerHTML.toLowerCase().replaceAll(/\s/g, '');
 
     found = []
 
@@ -17,6 +18,7 @@ function searchSecrets() {
             element = elem[i]
             if (content.indexOf(element) > -1) {
                 found.push(key);
+                break;
             }
         }
     }
