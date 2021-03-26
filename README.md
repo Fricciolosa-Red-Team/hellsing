@@ -2,6 +2,8 @@
 
 **Sniper. Passive Secrets Hunting.**
 
+![hellsing](https://github.com/Fricciolosa-Red-Team/hellsing/blob/main/hellsing.jpg)
+
 **1.** Open the Extension Management page by navigating to `chrome://extensions`.
 
    - Alternatively, open this page by clicking on the Extensions menu button and selecting Manage Extensions at the bottom of the menu.
