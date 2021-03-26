@@ -4,6 +4,15 @@ var targets = {
     "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key"],
     "Weglot Api Key": ["api:wg_", "api:'wg_", 'api:"wg_', "key:'wg_", "key:wg_",
         'key:"wg_', "api=wg_", "api='wg_", 'api="wg_', "key='wg_", "key=wg_", 'key="wg_'],
+    "Google Api Key": ["key=alza", "key:alza"],
+    "GMail OAuth2.0": [".apps.googleusercontent.com"],
+    "Picatic Api Key": ["sk_live_"],
+    "Stripe Api Key": ["sk_live_"],
+    "Square Access Token": ["sqOatp-"],
+    "Square OAuth Secret": ["q0csp-"],
+    "PayPal/Braintree Access Token": ["access_token,production"],
+    "Amazon AMS Auth Token": ["amzn.mws"],
+    "AWS Secret Key": ["AKIA"],
     "OpenSSH Key": ["beginopensshprivatekey", "endopensshprivatekey"]
 };
 
