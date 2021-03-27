@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', searchSecrets, false);
+searchSecrets();
 
 var targets = {
     "Generic Api Key": ["?key=", "?api_key=", "?apikey=", "apikey", "api-key", "api_key", "access_key", "access-key", "accesskey", "api-token", "api_token"],
