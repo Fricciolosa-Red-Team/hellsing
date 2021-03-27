@@ -31,7 +31,9 @@ var targets = {
 
 function searchSecrets() {
 
-    content = document.documentElement.innerHTML.toLowerCase().replaceAll(/\s/g, '');
+    var cleanContent = ""
+    content = document.documentElement.innerHTML.toLowerCase()
+    cleanContent = content.replaceAll(/\s/g, '').replaceAll("&amp;", /&/g).replaceAll("&quot;", /"/g);
 
     found = []
 
@@ -39,7 +41,7 @@ function searchSecrets() {
         elem = targets[key];
         for (var i = 0; i < elem.length; i++) {
             element = elem[i]
-            if (content.indexOf(element) > -1) {
+            if (cleanContent.indexOf(element) > -1) {
                 console.log("Hellsing: " + element + " in " + window.location.href);
                 found.push(key);
                 break;
