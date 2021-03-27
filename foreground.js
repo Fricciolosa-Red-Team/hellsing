@@ -15,6 +15,7 @@ var targets = {
     "Stripe Api Key": ["sk_live_"],
     "Square Access Token": ["sqOatp-"],
     "Square OAuth Secret": ["q0csp-"],
+    "Facebook AppSecret": ["facebook.com/oauth/access_token?"],
     "HubSpot Api Key": ["?hapikey="],
     "GitHub Client ID": ["?client_id=", "&client_id="],
     "GitHub Client Secret": ["?client_secret=", "&client_secret="],
