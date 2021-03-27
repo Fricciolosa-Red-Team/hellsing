@@ -33,10 +33,8 @@ function searchSecrets() {
 
     var cleanContent = "";
     content = document.documentElement.innerHTML.toLowerCase();
-    console.log(content);
     cleanContent = content.replaceAll(" ", '').replaceAll("&amp;", "&").replaceAll("&quot;", '"');
 
-    console.log(cleanContent);
     found = []
 
     for (var key in targets) {
