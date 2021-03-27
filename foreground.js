@@ -31,10 +31,12 @@ var targets = {
 
 function searchSecrets() {
 
-    var cleanContent = ""
-    content = document.documentElement.innerHTML.toLowerCase()
-    cleanContent = content.replaceAll(/\s/g, '').replaceAll("&amp;", /&/g).replaceAll("&quot;", /"/g);
+    var cleanContent = "";
+    content = document.documentElement.innerHTML.toLowerCase();
+    console.log(content);
+    cleanContent = content.replaceAll(" ", '').replaceAll("&amp;", "&").replaceAll("&quot;", '"');
 
+    console.log(cleanContent);
     found = []
 
     for (var key in targets) {
