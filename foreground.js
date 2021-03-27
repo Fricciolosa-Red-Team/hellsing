@@ -40,6 +40,7 @@ function searchSecrets() {
         for (var i = 0; i < elem.length; i++) {
             element = elem[i]
             if (content.indexOf(element) > -1) {
+                console.log("Hellsing: " + element + " in " + window.location.href);
                 found.push(key);
                 break;
             }
