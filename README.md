@@ -11,4 +11,4 @@
 
 **Customize the tool**
 
-Edit the targets dictionary [here](https://github.com/Fricciolosa-Red-Team/hellsing/blob/main/foreground.js#L3).
+Edit the targets dictionary [here](https://github.com/Fricciolosa-Red-Team/hellsing/blob/main/foreground.js#L4).
