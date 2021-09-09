@@ -26,7 +26,8 @@ var targets = {
     "AWS Secret Key": ["AKIA"],
     "OpenSSH Private Key": ["beginopensshprivatekey", "endopensshprivatekey"],
     "RSA Private Key": ["beginrsaprivatekey", "endrsaprivatekey"],
-    "Private Key": ["beginprivatekey", "endprivatekey"]
+    "Private Key": ["beginprivatekey", "endprivatekey"],
+    "GitHub token": ["ghp_", "gho_", "ghs_", "ghu_", "ghr"]
 };
 
 function searchSecrets() {
