@@ -15,4 +15,4 @@ Edit the targets dictionary [here](https://github.com/Fricciolosa-Red-Team/hells
 
 ### License 📜
 
-This repository is under [GNU General Public License v3.0](https://github.com/Fricciolosa-Red-Team/hellsing/blob/main/LICENSE).
+This repository is under [MIT License](https://github.com/Fricciolosa-Red-Team/hellsing/blob/main/LICENSE).
